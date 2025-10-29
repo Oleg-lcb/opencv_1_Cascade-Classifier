@@ -25,13 +25,13 @@ def detectAndDisplay(frame):
             frame = cv.circle(frame, eye_center, radius, (255, 0, 0), 4)
 
     cv.imshow('Capture - face detection', frame)
-    cv.waitKey(0)
+    # cv.waitKey(0)
 
 frame = cv.imread('che.jpg')
 # cv.imshow('image', frame)
 # cv.waitKey(0)
 
-detectAndDisplay(frame)
+# detectAndDisplay(frame)
 
 # parser = argparse.ArgumentParser(description='Code for Cascade Classifier tutorial.')
 # parser.add_argument('--face_cascade', help='Path to face cascade.', default='data/haarcascades/haarcascade_frontalface_alt.xml')
@@ -52,8 +52,27 @@ detectAndDisplay(frame)
 # if not eyes_cascade.load(cv.samples.findFile(eyes_cascade_name)):
 #     print('--(!)Error loading eyes cascade')
 #     exit(0)
-#
+
 # camera_device = args.camera
+# # 2. Read the video stream
+# cap = cv.VideoCapture(camera_device)
+# if not cap.isOpened:
+#     print('--(!)Error opening video capture')
+#     exit(0)
+
+video_path = 'video.mp4'
+cap = cv.VideoCapture(video_path)
+
+while True:
+    ret, frame = cap.read()
+    if frame is None:
+        print('--(!) No capture frame -- Break!')
+        break
+
+    detectAndDisplay(frame)
+
+    if cv.waitKey(10) == 27:
+        break
 
 
 
